@@ -4,6 +4,16 @@ version = "0.1.0"
 authors = ["CAD97 <cad97@cad97.com>"]
 
 description = "This crate exposes a `Single` trait for extracting the element from a single-element iterator (or `panic!`ing if that precondition is false)."
+
 repository = "https://github.com/CAD97/rust-single"
+
+readme = "README.md"
+
+keywords = ["iterator", "single", "once", "only"]
+
+license = "MIT/-2.0"
+
+[badges]
+travis-ci = { repository = "https://github.com/CAD97/rust-single" }
 
 [dependencies]
