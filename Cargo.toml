@@ -11,7 +11,7 @@ readme = "README.md"
 
 keywords = ["iterator", "single", "once", "only"]
 
-license = "MIT/-2.0"
+license = "MIT/Apache-2.0"
 
 [badges]
 travis-ci = { repository = "https://github.com/CAD97/rust-single" }
