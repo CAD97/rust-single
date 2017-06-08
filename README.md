@@ -3,6 +3,8 @@
 [![crates.io](https://img.shields.io/crates/v/single.svg)](https://crates.io/crates/single)
 [![crates.io](https://img.shields.io/crates/d/single.svg)](https://crates.io/crates/single)
 [![crates.io](https://img.shields.io/crates/dv/single.svg)](https://crates.io/crates/single)
+[![issues open](https://img.shields.io/github/issues/CAD97/rust-single.svg)](https://github.com/CAD97/rust-single/issues)
+![issues closed](https://img.shields.io/github/issues-closed/CAD97/rust-single.svg)
 
 This crate exposes a `Single` trait for extracting the element from a 
 single-element iterator (or `panic!`ing if that precondition is false).
