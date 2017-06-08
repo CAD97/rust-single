@@ -38,33 +38,33 @@ pub trait Single {
     <p>Panics if the iterator is empty or has more than one element.
     <h4>Examples</h4>
     <p>An emtpy iterator panics:
-    <div class="highlight highlight-source-rust"><pre>iter::empty().single();</pre></div>
+    <pre>iter::empty().single();</pre>
     <p>An iterator with multiple elements panics:
-    <div class="highlight highlight-source-rust"><pre>iter::repeat(0).single();</pre></div>
+    <pre>iter::repeat(0).single();</pre>
     <p>An iterator with a single element returns that element:
-    <div class="highlight highlight-source-rust"><pre>assert_eq!(iter::once(0).single(), 0);</pre></div>
+    <pre>assert_eq!(iter::once(0).single(), 0);</pre>
   <dt><code>fn single_or(self, default: Self::Item) -> Self::Item</code>
   <dd>
     <p>Get the single element from an iterator or a default fallback value.
     <p>Note that many iterators return references to the elements, so this method will as well if the backing iterator does.
     <h4>Examples</h4>
     <p>An empty iterator will return the fallback:
-    <div class="highlight highlight-source-rust"><pre>assert_eq!(iter::empty().single_or(5), 5)</pre></div>
+    <pre>assert_eq!(iter::empty().single_or(5), 5)</pre>
     <p>An iterator with multiple elements will return the fallback:
-    <div class="highlight highlight-source-rust"><pre>assert_eq!(iter::repeat(0).single_or(5), 5)</pre></div>
+    <pre>assert_eq!(iter::repeat(0).single_or(5), 5)</pre>
     <p>An iterator with a single element returns that element:
-    <div class="highlight highlight-source-rust"><pre>assert_eq!(iter::once(0).single_or(5), 0)</pre></div>
+    <pre>assert_eq!(iter::once(0).single_or(5), 0)</pre>
   <dt><code>fn single_or_else<F>(self, default_fn: F) -> Self::Item where F: FnOnce() -> Self::Item</code>
   <dd>
     <p>Get the single element from an iterator or from a default provider.
     <p>Note that many iterators return references to the elements, so this method will as well if the backing iterator does.
     <h4>Examples</h4>
     <p>An empty iterator will return the fallback:
-    <div class="highlight highlight-source-rust"><pre>assert_eq!(iter::empty().single_or_else(|| 5), 5)</pre></div>
+    <pre>assert_eq!(iter::empty().single_or_else(|| 5), 5)</pre>
     <p>An iterator with multiple elements will return the fallback:
-    <div class="highlight highlight-source-rust"><pre>assert_eq!(iter::repeat(0).single_or_else(|| 5), 5)</pre></div>
+    <pre>assert_eq!(iter::repeat(0).single_or_else(|| 5), 5)</pre>
     <p>An iterator with a single element returns that element:
-    <div class="highlight highlight-source-rust"><pre>assert_eq!(iter::once(0).single_or_else(|| 5), 0)</pre></div>
+    <pre>assert_eq!(iter::once(0).single_or_else(|| 5), 0)</pre>
 </dl>
 
 ### Implementors
