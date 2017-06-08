@@ -1,4 +1,4 @@
-# Single
+# Single [![Build Status](https://travis-ci.org/CAD97/rust-single.svg?branch=master)](https://travis-ci.org/CAD97/rust-single)
 
 This crate exposes a `Single` trait for extracting the element from a 
 single-element iterator (or `panic!`ing if that precondition is false).
