@@ -14,6 +14,6 @@ keywords = ["iterator", "single", "once", "only"]
 license = "MIT/Apache-2.0"
 
 [badges]
-travis-ci = { repository = "https://github.com/CAD97/rust-single" }
+travis-ci = { repository = "CAD97/rust-single" }
 
 [dependencies]
