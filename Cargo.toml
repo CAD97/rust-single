@@ -1,0 +1,9 @@
+[package]
+name = "single"
+version = "0.1.0"
+authors = ["CAD97 <cad97@cad97.com>"]
+
+description = "This crate exposes a `Single` trait for extracting the element from a single-element iterator (or `panic!`ing if that precondition is false)."
+repository = ""
+
+[dependencies]
