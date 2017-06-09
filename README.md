@@ -32,7 +32,7 @@ pub trait Single {
 ### Required Methods
 
 <dl>
-  <dt><code>fn single(self) -> Result<Self::Item, Error></code>
+  <dt><code>fn single(self) -> Result&lt;Self::Item, Error&gt;</code>
   <dd>
     <p>Get the single element from a single-element iterator.
     <p>Note that many iterators return references to the elements, so this method will as well if the backing iterator does.
