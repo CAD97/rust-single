@@ -1,13 +1,12 @@
 # Single
 [![Build Status](https://img.shields.io/travis/CAD97/rust-single.svg)](https://travis-ci.org/CAD97/rust-single)
 [![crates.io](https://img.shields.io/crates/v/single.svg)](https://crates.io/crates/single)
-[![crates.io](https://img.shields.io/crates/d/single.svg)](https://crates.io/crates/single)
-[![crates.io](https://img.shields.io/crates/dv/single.svg)](https://crates.io/crates/single)
+[![downloads](https://img.shields.io/crates/d/single.svg)](https://crates.io/crates/single)
+[![version downloads](https://img.shields.io/crates/dv/single.svg)](https://crates.io/crates/single)
 [![issues open](https://img.shields.io/github/issues/CAD97/rust-single.svg)](https://github.com/CAD97/rust-single/issues)
 ![issues closed](https://img.shields.io/github/issues-closed/CAD97/rust-single.svg)
 
-This crate exposes a `Single` trait for extracting the element from a 
-single-element iterator (or `panic!`ing if that precondition is false).
+This crate exposes a `Single` trait for extracting the element from a single-element iterator.
 
 ## License
 
@@ -19,10 +18,7 @@ at your discretion. This crate is dual-licensed for compatibility with rust itse
 ```rust
 pub trait Single {
     type Item;
-    fn single(self) -> Self::Item;
-    fn single_or(self, default: Self::Item) -> Self::Item;
-    fn single_or_else<F>(self, default_fn: F) -> Self::Item
-        where F: FnOnce() -> Self::Item;
+    fn single(self) -> Result<Self::Item, Error>;
 }
 ```
 
@@ -36,41 +32,14 @@ pub trait Single {
 ### Required Methods
 
 <dl>
-  <dt><code>fn single(self) -> Self::Item</code>
+  <dt><code>fn single(self) -> Result<Self::Item, Error></code>
   <dd>
     <p>Get the single element from a single-element iterator.
     <p>Note that many iterators return references to the elements, so this method will as well if the backing iterator does.
-    <h4>Panics</h4>
-    <p>Panics if the iterator is empty or has more than one element.
     <h4>Examples</h4>
-    <p>An empty iterator panics:
-    <pre>iter::empty().single();</pre>
-    <p>An iterator with multiple elements panics:
-    <pre>iter::repeat(0).single();</pre>
-    <p>An iterator with a single element returns that element:
-    <pre>assert_eq!(iter::once(0).single(), 0);</pre>
-  <dt><code>fn single_or(self, default: Self::Item) -> Self::Item</code>
-  <dd>
-    <p>Get the single element from an iterator or a default fallback value.
-    <p>Note that many iterators return references to the elements, so this method will as well if the backing iterator does.
-    <h4>Examples</h4>
-    <p>An empty iterator will return the fallback:
-    <pre>assert_eq!(iter::empty().single_or(5), 5)</pre>
-    <p>An iterator with multiple elements will return the fallback:
-    <pre>assert_eq!(iter::repeat(0).single_or(5), 5)</pre>
-    <p>An iterator with a single element returns that element:
-    <pre>assert_eq!(iter::once(0).single_or(5), 0)</pre>
-  <dt><code>fn single_or_else<F>(self, default_fn: F) -> Self::Item where F: FnOnce() -> Self::Item</code>
-  <dd>
-    <p>Get the single element from an iterator or from a default provider.
-    <p>Note that many iterators return references to the elements, so this method will as well if the backing iterator does.
-    <h4>Examples</h4>
-    <p>An empty iterator will return the fallback:
-    <pre>assert_eq!(iter::empty().single_or_else(|| 5), 5)</pre>
-    <p>An iterator with multiple elements will return the fallback:
-    <pre>assert_eq!(iter::repeat(0).single_or_else(|| 5), 5)</pre>
-    <p>An iterator with a single element returns that element:
-    <pre>assert_eq!(iter::once(0).single_or_else(|| 5), 0)</pre>
+<pre>assert_eq!(iter::empty::<i32>().single(), Err(single::Error::NoElements));
+assert_eq!(iter::once(0).single(), Ok(0));
+assert_eq!(iter::repeat(0).single(), Err(single::Error::MultipleElements));</pre>
 </dl>
 
 ### Implementors
