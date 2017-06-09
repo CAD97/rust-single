@@ -17,7 +17,7 @@ pub trait Single {
     ///
     /// # Examples
     ///
-    /// An emtpy iterator panics:
+    /// An empty iterator panics:
     ///
     /// ```should_panic(expected = "Asked empty iterator for single element")
     /// # use single::Single;

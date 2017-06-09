@@ -43,7 +43,7 @@ pub trait Single {
     <h4>Panics</h4>
     <p>Panics if the iterator is empty or has more than one element.
     <h4>Examples</h4>
-    <p>An emtpy iterator panics:
+    <p>An empty iterator panics:
     <pre>iter::empty().single();</pre>
     <p>An iterator with multiple elements panics:
     <pre>iter::repeat(0).single();</pre>
