@@ -1,20 +1,19 @@
 [package]
 name = "single"
-version = "0.2.0"
+version = "0.2.1"
 authors = ["CAD97 <cad97@cad97.com>"]
-
-description = 'This crate exposes a trait "single::Single" for extracting the element from a single-element iterator.'
-
 homepage = "https://github.com/CAD97/rust-single"
-repository = "https://github.com/CAD97/rust-single"
-
-readme = "README.md"
-
 keywords = ["iterator", "single", "once", "only"]
-
 license = "MIT/Apache-2.0"
+repository = "https://github.com/CAD97/rust-single"
+readme = "README.md"
+description = """
+Provides the Single trait for extracting the element from a \
+single-element iterator.
+"""
 
 [badges]
 travis-ci = { repository = "CAD97/rust-single" }
 
 [dependencies]
+quick-error = "1"

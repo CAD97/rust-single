@@ -1,84 +1,70 @@
-//! This crate exposes a `Single` trait for extracting the element from a
-//! single-element iterator (or `panic!`ing if that precondition is false).
+//! Provides the `Single` trait for extracting the element from a
+//! single-element iterator.
+//!
+//! # Examples
+//!
+//! ```
+//! use single::{ Single, Error };
+//! use std::iter;
+//!
+//! assert_eq!(iter::empty::<i32>().single(), Err(Error::NoElements));
+//! assert_eq!(iter::once(0).single(), Ok(0));
+//! assert_eq!(iter::repeat(0).single(), Err(Error::MultipleElements));
+//! ```
+
+#[macro_use]
+extern crate quick_error;
 
 use std::{fmt, error, result};
 
-type Result<T> = result::Result<T, self::Error>;
+type Result<T> = result::Result<T, Error>;
 
-/// Trait to extract the element from a single-element iterator.
-pub trait Single {
-    /// The item type of the wrapped iterator.
-    type Item;
-
+pub trait Single: Iterator {
     /// Get the single element from a single-element iterator.
-    ///
-    /// Note that many iterators return references to the elements,
-    /// so this method will as well if the backing iterator does.
     ///
     /// # Examples
     ///
     /// ```
-    /// # use single::{ self, Single };
+    /// # use single::{ Single, Error };
     /// # use std::iter;
-    /// assert_eq!(iter::empty::<i32>().single(), Err(single::Error::NoElements));
+    /// assert_eq!(iter::empty::<i32>().single(), Err(Error::NoElements));
     /// assert_eq!(iter::once(0).single(), Ok(0));
-    /// assert_eq!(iter::repeat(0).single(), Err(single::Error::MultipleElements));
+    /// assert_eq!(iter::repeat(0).single(), Err(Error::MultipleElements));
     /// ```
     fn single(self) -> Result<Self::Item>;
 }
 
-/// An error in the execution of [`single::Single::single`](trait.Single.html#tymethod.single).
-#[derive(Clone, Copy, PartialEq, Eq)]
-pub enum Error {
-    /// Asked empty iterator for single element.
-    NoElements,
-    /// Asked iterator with multiple elements for single element.
-    MultipleElements,
+quick_error! {
+    /// An error in the execution of
+    /// [`Single::single`](trait.Single.html#tymethod.single).
+    #[derive(Clone, Copy, PartialEq, Eq)]
+    pub enum Error {
+        /// Asked empty iterator for single element.
+        NoElements {
+            description("Called single() on empty iterator")
+        }
+        /// Asked iterator with multiple elements for single element.
+        MultipleElements {
+            description("Called single() on multiple-element iterator")
+        }
+    }
 }
 
 impl fmt::Debug for Error {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        fmt::Display::fmt(self, f)
+        write!(f, "{}", error::Error::description(self))
     }
 }
 
-impl fmt::Display for Error {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match *self {
-            Error::NoElements => write!(
-                f,
-                "SingleError::NoElements: {}",
-                error::Error::description(self),
-            ),
-            Error::MultipleElements => write!(
-                f,
-                "SingleError::MultipleElements: {}",
-                error::Error::description(self),
-            ),
-        }
-    }
-}
-
-impl error::Error for Error {
-    fn description(&self) -> &str {
-        match *self {
-            Error::NoElements => "Asked empty iterator for single element",
-            Error::MultipleElements => "Asked iterator with multiple elements for single element",
-        }
-    }
-    fn cause(&self) -> Option<&error::Error> { None }
-}
-
-impl<I> Single for I where I: Iterator {
-    type Item = <Self as Iterator>::Item;
-
+impl<I: Iterator> Single for I {
     fn single(mut self) -> Result<Self::Item> {
         match self.next() {
             None => Err(Error::NoElements),
-            Some(element) => if self.next().is_none() {
-                Ok(element)
-            } else {
-                Err(Error::MultipleElements)
+            Some(element) => {
+                match self.next() {
+                    None => Ok(element),
+                    Some(_) => Err(Error::MultipleElements),
+                }
             }
         }
     }
@@ -90,10 +76,14 @@ mod test {
     use super::Single;
 
     #[test]
-    #[should_panic(expected = "Asked empty iterator for single element")]
-    fn panic_empty() { let _: i32 = iter::empty().single().unwrap(); }
+    #[should_panic(expected = "Called single() on empty iterator")]
+    fn panic_empty() {
+        let _: i32 = iter::empty().single().unwrap();
+    }
 
     #[test]
-    #[should_panic(expected = "Asked iterator with multiple elements for single element")]
-    fn panic_multiple() { let _ = iter::repeat(0).single().unwrap(); }
+    #[should_panic(expected = "Called single() on multiple-element iterator")]
+    fn panic_multiple() {
+        let _ = iter::repeat(0).single().unwrap();
+    }
 }
