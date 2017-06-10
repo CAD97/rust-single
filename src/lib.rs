@@ -15,7 +15,7 @@
 #[macro_use]
 extern crate quick_error;
 
-use std::{fmt, error, result};
+use std::{error, fmt, result};
 
 type Result<T> = result::Result<T, Error>;
 
@@ -65,25 +65,21 @@ impl<I: Iterator> Single for I {
                     None => Ok(element),
                     Some(_) => Err(Error::MultipleElements),
                 }
-            }
+            },
         }
     }
 }
 
 #[cfg(test)]
 mod test {
-    use std::iter;
     use super::Single;
+    use std::iter;
 
     #[test]
     #[should_panic(expected = "Called single() on empty iterator")]
-    fn panic_empty() {
-        let _: i32 = iter::empty().single().unwrap();
-    }
+    fn panic_empty() { let _: i32 = iter::empty().single().unwrap(); }
 
     #[test]
     #[should_panic(expected = "Called single() on multiple-element iterator")]
-    fn panic_multiple() {
-        let _ = iter::repeat(0).single().unwrap();
-    }
+    fn panic_multiple() { let _ = iter::repeat(0).single().unwrap(); }
 }
