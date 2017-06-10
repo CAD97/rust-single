@@ -10,7 +10,7 @@
 [ ![issues open](https://img.shields.io/github/issues/CAD97/rust-single.svg)
 ](https://github.com/CAD97/rust-single/issues)
 [ ![issues closed](https://img.shields.io/github/issues-closed/CAD97/rust-single.svg)
-]((https://github.com/CAD97/rust-single/issues))
+](https://github.com/CAD97/rust-single/issues)
 
 This crate provides the `Single` trait for extracting the element from a
 single-element iterator.
