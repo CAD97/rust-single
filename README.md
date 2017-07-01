@@ -35,7 +35,7 @@ pub trait Single {
     <p>Get the single element from a single-element iterator.
     <h4>Examples</h4>
     <pre>
-assert_eq!(iter::empty::<i32>().single(), Err(single::Error::NoElements));
+assert_eq!(iter::empty::&lt;i32&gt;().single(), Err(single::Error::NoElements));
 assert_eq!(iter::once(0).single(), Ok(0));
 assert_eq!(iter::repeat(0).single(), Err(single::Error::MultipleElements));
 </dl>
