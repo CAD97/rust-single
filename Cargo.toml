@@ -1,6 +1,6 @@
 [package]
 name = "single"
-version = "0.3.0"
+version = "1.0.0"
 authors = ["CAD97 <cad97@cad97.com>"]
 homepage = "https://github.com/CAD97/rust-single"
 keywords = ["iterator", "single", "once", "only"]
