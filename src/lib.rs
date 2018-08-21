@@ -13,8 +13,8 @@
 //! ```
 
 #![cfg_attr(not(feature = "std"), no_std)]
-#![forbid(bad_style, missing_debug_implementations, unconditional_recursion, future_incompatible)]
-#![deny(missing_docs, unsafe_code, unused)]
+#![forbid(missing_debug_implementations, unconditional_recursion, future_incompatible)]
+#![deny(bad_style, missing_docs, unsafe_code, unused)]
 
 #[macro_use]
 extern crate failure;
