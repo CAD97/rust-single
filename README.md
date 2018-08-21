@@ -19,7 +19,7 @@ You may use this crate under the MIT license or the Apache License 2.0 at your d
 ## Trait single::Single
 
 ```rust
-pub trait Single {
+pub trait Single: Iterator {
     fn single(self) -> Result<Self::Item, Error>;
 }
 ```
