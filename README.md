@@ -1,3 +1,9 @@
+# This crate is deprecated.
+
+Use [`Itertools::at_most_one`](https://docs.rs/itertools/latest/itertools/trait.Itertools.html#method.at_most_one) instead, which provides equivalent functionality in a better fashion.
+
+-----
+
 # Single
 [ ![Build Status](https://img.shields.io/travis/CAD97/rust-single.svg)
 ](https://travis-ci.org/CAD97/rust-single)
