@@ -35,6 +35,25 @@ pub trait Single: Iterator {
     /// assert_eq!(iter::repeat(0).single(), Err(Error::MultipleElements));
     /// ```
     fn single(self) -> Result<Self::Item, Error>;
+
+    /// Get the single element from a single-element iterator or None if it's empty
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # use single::{ Single, Error };
+    /// # use std::iter;
+    /// assert_eq!(iter::empty::<i32>().single(), Ok(None));
+    /// assert_eq!(iter::once(0).single(), Ok(Some(0)));
+    /// assert_eq!(iter::repeat(0).single(), Err(Error::MultipleElements));
+    /// ```
+    fn single_or_none(self) -> Result<Option<Self::Item>, Error> {
+        match self.single() {
+            Ok(item) => Ok(Some(item)),
+            Err(Error::NoElements) => Ok(None),
+            Err(e) => Err(e),
+        }
+    }
 }
 
 /// An error in the execution of [`Single::single`](trait.Single.html#tymethod.single).
