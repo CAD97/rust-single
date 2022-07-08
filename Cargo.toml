@@ -1,23 +1,17 @@
 [package]
 name = "single"
-version = "1.0.0"
-authors = ["CAD97 <cad97@cad97.com>"]
-homepage = "https://github.com/CAD97/rust-single"
+version = "1.0.1"
 keywords = ["iterator", "single", "once", "only"]
-license = "MIT/Apache-2.0"
+categories = ["rust-patterns"]
+license = "MIT OR Apache-2.0"
 repository = "https://github.com/CAD97/rust-single"
 readme = "README.md"
 description = """
-Provides the Single trait for extracting the element from a \
-single-element iterator.
+Deprecated poor-man's version of Itertools::at_most_one
 """
 
 [badges]
-travis-ci = { repository = "CAD97/rust-single" }
-
-is-it-maintained-issue-resolution = { repository = "CAD97/rust-single" }
-is-it-maintained-open-issues = { repository = "CAD97/rust-single" }
-maintenance = { status = "passively-maintained" }
+maintenance = { status = "deprecated" }
 
 [dependencies.failure]
 version = "0.1"

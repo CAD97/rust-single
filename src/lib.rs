@@ -1,3 +1,5 @@
+//! THIS CRATE IS DEPRECATED. Use [`Itertools::at_most_one`](https://docs.rs/itertools/latest/itertools/trait.Itertools.html#method.at_most_one) instead.
+//!
 //! Provides the `Single` trait for extracting the element from a
 //! single-element iterator.
 //!
@@ -13,8 +15,17 @@
 //! ```
 
 #![cfg_attr(not(feature = "std"), no_std)]
-#![forbid(missing_debug_implementations, unconditional_recursion, future_incompatible)]
+#![forbid(
+    missing_debug_implementations,
+    unconditional_recursion,
+    future_incompatible
+)]
 #![deny(bad_style, missing_docs, unsafe_code, unused)]
+#![allow(deprecated)]
+#![deprecated(
+    since = "1.0.1",
+    note = "use [`Itertools::at_most_one`](https://docs.rs/itertools/latest/itertools/trait.Itertools.html#method.at_most_one) instead"
+)]
 
 #[macro_use]
 extern crate failure;
@@ -22,6 +33,10 @@ extern crate failure;
 use core as std;
 
 #[allow(missing_docs)]
+#[deprecated(
+    since = "1.0.1",
+    note = "use [`Itertools::at_most_one`](https://docs.rs/itertools/latest/itertools/trait.Itertools.html#method.at_most_one) instead"
+)]
 pub trait Single: Iterator {
     /// Get the single element from a single-element iterator.
     ///
@@ -34,6 +49,10 @@ pub trait Single: Iterator {
     /// assert_eq!(iter::once(0).single(), Ok(0));
     /// assert_eq!(iter::repeat(0).single(), Err(Error::MultipleElements));
     /// ```
+    #[deprecated(
+        since = "1.0.1",
+        note = "use [`Itertools::at_most_one`](https://docs.rs/itertools/latest/itertools/trait.Itertools.html#method.at_most_one) instead"
+    )]
     fn single(self) -> Result<Self::Item, Error>;
 }
 
