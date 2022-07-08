@@ -47,7 +47,10 @@ pub trait Single: Iterator {
     /// assert_eq!(iter::once(0).single(), Ok(Some(0)));
     /// assert_eq!(iter::repeat(0).single(), Err(Error::MultipleElements));
     /// ```
-    fn single_or_none(self) -> Result<Option<Self::Item>, Error> {
+    fn single_or_none(self) -> Result<Option<Self::Item>, Error>
+    where
+        Self: Sized,
+    {
         match self.single() {
             Ok(item) => Ok(Some(item)),
             Err(Error::NoElements) => Ok(None),
